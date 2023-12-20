@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    open-in-view: true
+
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/archive'
+    username: "${postgres_user:postgres}"
+    password: "${postgres_pass:postgres}"
+    driver-class-name: org.postgresql.Driver

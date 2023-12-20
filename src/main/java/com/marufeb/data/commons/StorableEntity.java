@@ -27,8 +27,9 @@ public abstract class StorableEntity {
     private byte[] data;
     private String name;
     private String description;
-    private String extension;
+    @Transient
     private String storage;
+    private String extension;
 
     @Builder.Default
     private boolean deleted = false;
@@ -50,6 +51,11 @@ public abstract class StorableEntity {
     @PreUpdate
     public void preUpdate() {
         lastUpdate = LocalDateTime.now();
+    }
+
+    @PostLoad
+    public void postLoad() {
+        extension = name.substring(name.lastIndexOf("."));
     }
 
 }
