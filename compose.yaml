@@ -10,6 +10,18 @@ services:
     networks:
       - data
 
+  keycloak:
+    image: 'quay.io/keycloak/keycloak:21.1'
+    container_name: keycloak
+    command: start-dev --import-realm
+    volumes:
+      - ./platform/keycloak:/opt/keycloak/data/import
+    environment:
+      - 'KEYCLOAK_ADMIN=user'
+      - 'KEYCLOAK_ADMIN_PASSWORD=password'
+    ports:
+      - '9090:8080'
+
 networks:
   data:
     driver: bridge
