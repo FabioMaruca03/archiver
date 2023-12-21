@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    root: trace
+
+spring:
+  application:
+    name: 'gateway'
+
+  security:
+    oauth2:
+      client:
+        registration:
+          data-api:
+            client-id: '${keycloak_client_id:data-api}'
+            client-secret: '${keycloak_secret:lgkTUqYOYq8Q9LkZSsEYkkxV2D3d1Z3a}'
+            authorization-grant-type: authorization_code
+            redirect-uri: 'http://localhost:${server.port}/login/oauth2/code/data-api'
+            scope: openid, profile
+        provider:
+          data-api:
+            token-uri: '${keycloak_uri:http://localhost:9090}/realms/${keycloak_realm:archiver}/protocol/openid-connect/token'
+            authorization-uri: '${keycloak_uri:http://localhost:9090}/realms/${keycloak_realm:archiver}/protocol/openid-connect/auth'
+            user-info-uri: '${keycloak_uri:http://localhost:9090}/realms/${keycloak_realm:archiver}/protocol/openid-connect/userinfo'
+            user-name-attribute: 'preferred_username'
